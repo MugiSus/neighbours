@@ -1,3 +1,7 @@
+:root {
+    --grid-color: #282828;
+}
+
 html, body{
     text-align: center;
     font-family: "Inconsolata";
@@ -10,4 +14,19 @@ html, body{
 #canvas {
     width: 100vw;
     height: 100vh;
+    background-image:
+    repeating-linear-gradient(
+        90deg,
+        var(--grid-color),
+        var(--grid-color) 1px,
+        #0000 1px,
+        #0000 100px
+    ),
+    repeating-linear-gradient(
+        0deg,
+        var(--grid-color),
+        var(--grid-color) 1px,
+        #0000 1px,
+        #0000 100px
+    );
 }
