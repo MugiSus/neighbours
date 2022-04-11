@@ -36,11 +36,10 @@ class Particle {
             ...addParticleInDivisionBlock(blockX + 1, blockY + 1, this)
         ]).forEach(particle => {
             if (particle == this) return;
-
             checkcount++;
             let distance = ((this.x - particle.x) ** 2 + (this.y - particle.y) ** 2) ** 0.5;
             if (distance < neigboursDistance) {
-                ctx.globalAlpha = 1 - distance / neigboursDistance;
+                ctx.globalAlpha = 1 - (distance / neigboursDistance);
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(particle.x, particle.y);
@@ -66,7 +65,7 @@ function updateParticles() {
 }
 
 function addParticlesRandomly() {
-    if (Math.random() < 0.25) {
+    if (Math.random() < 0.2) {
         let speed = Math.random() * 2 + 0.5;
         let rad = Math.random() * Math.PI * 2;
         particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, speed * Math.cos(rad), speed * Math.sin(rad)));
