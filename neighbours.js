@@ -1,6 +1,7 @@
 let particles = [];
 let divisionBlocks = {};
-let neigboursDistance = 150; // neibours distance
+let neigboursDistance = 120; // neibours distance
+let checkcount = 0;
 
 class Particle {
     constructor(x, y, vx, vy) {
@@ -36,6 +37,7 @@ class Particle {
         ]).forEach(particle => {
             if (particle == this) return;
 
+            checkcount++;
             let distance = ((this.x - particle.x) ** 2 + (this.y - particle.y) ** 2) ** 0.5;
             if (distance < neigboursDistance) {
                 ctx.globalAlpha = 1 - distance / neigboursDistance;
@@ -57,31 +59,10 @@ function addParticleInDivisionBlock(x, y, particle) {
 }
 
 function updateParticles() {
+    checkcount = 0;
     divisionBlocks = {};
     ctx.fillStyle = '#ffffff88';
     particles = particles.filter(particle => particle.update(ctx));
-}
-
-function lineNeighbourParticles() {
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 1;
-    particles.forEach(particle => {
-        particle.neigbours = 0;
-        particles.forEach(particle2 => {
-            if (particle !== particle2) {
-                let distance = ((particle.x - particle2.x) ** 2 + (particle.y - particle2.y) ** 2) ** 0.5;
-                if (distance < neigboursDistance) {
-                    ctx.globalAlpha = 1 - distance / neigboursDistance;
-                    ctx.beginPath();
-                    ctx.moveTo(particle.x, particle.y);
-                    ctx.lineTo(particle2.x, particle2.y);
-                    ctx.stroke();
-                    particle.neigbours++;
-                }
-            }
-        });
-    });
-    ctx.globalAlpha = 1;
 }
 
 function addParticlesRandomly() {
@@ -95,7 +76,6 @@ function addParticlesRandomly() {
 function main() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     updateParticles();
-    // lineNeighbourParticles();
     addParticlesRandomly();
     requestAnimationFrame(main);
 }
