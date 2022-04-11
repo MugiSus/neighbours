@@ -1,6 +1,6 @@
 let particles = [];
 let divisionBlocks = {};
-let neigboursDistance = 120; // neibours distance
+let neigboursDistance = 150; // neibours distance
 let checkcount = 0;
 
 class Particle {
@@ -66,7 +66,7 @@ function updateParticles() {
 }
 
 function addParticlesRandomly() {
-    if (Math.random() < 0.2) {
+    if (Math.random() < 0.25) {
         let speed = Math.random() * 2 + 0.5;
         let rad = Math.random() * Math.PI * 2;
         particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, speed * Math.cos(rad), speed * Math.sin(rad)));
