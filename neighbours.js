@@ -1,6 +1,6 @@
 let particles = [];
 let divisionBlocks = {};
-let neigbours = 150; // neibours distance
+let neigboursDistance = 150; // neibours distance
 
 class Particle {
     constructor(x, y, vx, vy) {
@@ -20,9 +20,9 @@ class Particle {
         this.x += this.vx;
         this.y += this.vy;
         this.draw(ctx);
-        addParticleInDivisionBlock(Math.round(this.x / neigbours), Math.round(this.y / neigbours), this);
+        addParticleInDivisionBlock(Math.round(this.x / neigboursDistance), Math.round(this.y / neigboursDistance), this);
         this.neigbours = 0;
-        return this.x > -neigbours && this.x < canvas.width + neigbours && this.y > -neigbours && this.y < canvas.height + neigbours;
+        return this.x > -neigboursDistance && this.x < canvas.width + neigboursDistance && this.y > -neigboursDistance && this.y < canvas.height + neigboursDistance;
     }
 }
 
@@ -43,8 +43,8 @@ function lineNeighbourParticles() {
         particles.forEach(particle2 => {
             if (particle !== particle2) {
                 let distance = ((particle.x - particle2.x) ** 2 + (particle.y - particle2.y) ** 2) ** 0.5;
-                if (distance < neigbours) {
-                    ctx.globalAlpha = 1 - distance / neigbours;
+                if (distance < neigboursDistance) {
+                    ctx.globalAlpha = 1 - distance / neigboursDistance;
                     ctx.beginPath();
                     ctx.moveTo(particle.x, particle.y);
                     ctx.lineTo(particle2.x, particle2.y);
@@ -60,7 +60,9 @@ function lineNeighbourParticles() {
 
 function addParticlesRandomly() {
     if (Math.random() < 0.2) {
-        particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 4 - 2, Math.random() * 4 - 2));
+        let speed = Math.random() * 2 + 0.5;
+        let rad = Math.random() * Math.PI * 2;
+        particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, speed * Math.cos(rad), speed * Math.sin(rad)));
     }
 }
 

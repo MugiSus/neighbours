@@ -23,7 +23,7 @@ html, body{
         #0000 100px
     ),
     repeating-linear-gradient(
-        0deg,
+        180deg,
         var(--grid-color),
         var(--grid-color) 1px,
         #0000 1px,
