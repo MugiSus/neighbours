@@ -22,20 +22,38 @@ class Particle {
         this.draw(ctx);
 
         let [blockX, blockY] = [
-            Math.trunc(this.x / neigboursDistance) - (this.x % 1 < 0.5),
-            Math.trunc(this.y / neigboursDistance) - (this.y % 1 < 0.5)
+            Math.trunc(this.x / (neigboursDistance * 2)) - (this.x / (neigboursDistance * 2) % 1 < 0.5),
+            Math.trunc(this.y / (neigboursDistance * 2)) - (this.y / (neigboursDistance * 2) % 1 < 0.5)
         ];
-        addParticleInDivisionBlock(blockX, blockY, this);
-        addParticleInDivisionBlock(blockX + 1, blockY, this);
-        addParticleInDivisionBlock(blockX, blockY + 1, this);
-        addParticleInDivisionBlock(blockX + 1, blockY + 1, this);
+        
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        new Set([
+            ...addParticleInDivisionBlock(blockX, blockY, this),
+            ...addParticleInDivisionBlock(blockX + 1, blockY, this),
+            ...addParticleInDivisionBlock(blockX, blockY + 1, this),
+            ...addParticleInDivisionBlock(blockX + 1, blockY + 1, this)
+        ]).forEach(particle => {
+            if (particle == this) return;
+
+            let distance = ((this.x - particle.x) ** 2 + (this.y - particle.y) ** 2) ** 0.5;
+            if (distance < neigboursDistance) {
+                ctx.globalAlpha = 1 - distance / neigboursDistance;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(particle.x, particle.y);
+                ctx.stroke();
+            }
+        });
+        ctx.globalAlpha = 1;
 
         return this.x > -neigboursDistance && this.x < canvas.width + neigboursDistance && this.y > -neigboursDistance && this.y < canvas.height + neigboursDistance;
     }
 }
 
 function addParticleInDivisionBlock(x, y, particle) {
-    (divisionBlocks[x] ??= {})[y] = particle;
+    ((divisionBlocks[x] ??= {})[y] ??= []).push(particle);
+    return divisionBlocks[x][y];
 }
 
 function updateParticles() {
@@ -77,7 +95,7 @@ function addParticlesRandomly() {
 function main() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     updateParticles();
-    lineNeighbourParticles();
+    // lineNeighbourParticles();
     addParticlesRandomly();
     requestAnimationFrame(main);
 }
