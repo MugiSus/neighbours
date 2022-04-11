@@ -20,17 +20,26 @@ class Particle {
         this.x += this.vx;
         this.y += this.vy;
         this.draw(ctx);
-        addParticleInDivisionBlock(Math.round(this.x / neigboursDistance), Math.round(this.y / neigboursDistance), this);
-        this.neigbours = 0;
+
+        let [blockX, blockY] = [
+            Math.trunc(this.x / neigboursDistance) - (this.x % 1 < 0.5),
+            Math.trunc(this.y / neigboursDistance) - (this.y % 1 < 0.5)
+        ];
+        addParticleInDivisionBlock(blockX, blockY, this);
+        addParticleInDivisionBlock(blockX + 1, blockY, this);
+        addParticleInDivisionBlock(blockX, blockY + 1, this);
+        addParticleInDivisionBlock(blockX + 1, blockY + 1, this);
+
         return this.x > -neigboursDistance && this.x < canvas.width + neigboursDistance && this.y > -neigboursDistance && this.y < canvas.height + neigboursDistance;
     }
 }
 
 function addParticleInDivisionBlock(x, y, particle) {
-    (divisionBlocks[x] ?? {})[y] = particle;
+    (divisionBlocks[x] ??= {})[y] = particle;
 }
 
 function updateParticles() {
+    divisionBlocks = {};
     ctx.fillStyle = '#ffffff88';
     particles = particles.filter(particle => particle.update(ctx));
 }
@@ -55,7 +64,6 @@ function lineNeighbourParticles() {
         });
     });
     ctx.globalAlpha = 1;
-    divisionBlocks = {};
 }
 
 function addParticlesRandomly() {
