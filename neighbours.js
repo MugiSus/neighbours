@@ -1,6 +1,9 @@
+const url = new URL(window.location.href);
+let isInfomationEnabled = url.searchParams.get('infos') == 'true';
+
 let particles = [];
 let divisionBlocks = {};
-let neigboursDistance = 150; // neibours distance
+let neighboursRange = 150; // neibours distance
 let checkcount = 0;
 
 class Particle {
@@ -23,8 +26,8 @@ class Particle {
         this.draw(ctx);
         
         let [blockX, blockY] = [
-            Math.trunc(this.x / neigboursDistance) - (this.x / neigboursDistance % 1 < 0.5),
-            Math.trunc(this.y / neigboursDistance) - (this.y / neigboursDistance % 1 < 0.5)
+            Math.trunc(this.x / neighboursRange) - (this.x / neighboursRange % 1 < 0.5),
+            Math.trunc(this.y / neighboursRange) - (this.y / neighboursRange % 1 < 0.5)
         ];
         
         new Set([
@@ -36,17 +39,23 @@ class Particle {
             if (particle == this) return;
             checkcount++;
             let distance = ((this.x - particle.x) ** 2 + (this.y - particle.y) ** 2) ** 0.5;
-            if (distance < neigboursDistance) {
-                ctx.globalAlpha = 1 - (distance / neigboursDistance);
+            if (distance < neighboursRange) {
+                ctx.globalAlpha = 1 - (distance / neighboursRange);
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(particle.x, particle.y);
                 ctx.stroke();
+
+                // let direction = Math.atan2(particle.y - this.y, particle.x - this.x);
+                // this.vx += Math.cos(direction) * (distance / neighboursRange) * 0.04;
+                // this.vy += Math.sin(direction) * (distance / neighboursRange) * 0.04;
+                // particle.vx -= Math.cos(direction) * (distance / neighboursRange) * 0.04;
+                // particle.vy -= Math.sin(direction) * (distance / neighboursRange) * 0.04;
             }
         });
         ctx.globalAlpha = 1;
         
-        return this.x > -neigboursDistance && this.x < canvas.width + neigboursDistance && this.y > -neigboursDistance && this.y < canvas.height + neigboursDistance;
+        return this.x > -neighboursRange && this.x < canvas.width + neighboursRange && this.y > -neighboursRange && this.y < canvas.height + neighboursRange;
     }
 }
 
@@ -69,28 +78,25 @@ function updateParticles() {
 }
 
 function addParticlesRandomly() {
-    if (Math.random() < 0.2) {
+    if (Math.random() < 0.25) {
         let speed = Math.random() * 1.5 + 0.5;
         let rad = Math.random() * Math.PI * 2;
         particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, speed * Math.cos(rad), speed * Math.sin(rad)));
     }
 }
 
-function showParticlesCountOnAllDivisionBlocks() {
-    ctx.textAlign = 'right';
+function showInformations() {
+    ctx.textAlign = 'center';
     ctx.fillStyle = '#ffffff';
     ctx.font = '300 30px Inconsolata';
     for (let x in divisionBlocks) {
         for (let y in divisionBlocks[x]) {
             ctx.globalAlpha = divisionBlocks[x][y].length / 20 * 0.1;
-            ctx.fillRect(x * neigboursDistance, y * neigboursDistance, neigboursDistance, neigboursDistance);
+            ctx.fillRect(x * neighboursRange, y * neighboursRange, neighboursRange, neighboursRange);
             ctx.globalAlpha = 0.08;
-            ctx.fillText(divisionBlocks[x][y].length, (x * 1 + 1) * neigboursDistance - 15, (y * 1 + 1) * neigboursDistance - 15);
+            ctx.fillText(divisionBlocks[x][y].length, (x * 1 + 0.5) * neighboursRange, (y * 1 + 0.5) * neighboursRange + 10);
         }
     }
-    ctx.font = 'italic 100 30px Inconsolata';
-    ctx.globalAlpha = 0.2;
-    ctx.fillText("neighbours", canvas.width - 20, 35);
     ctx.font = '100 30px Inconsolata';
     ctx.textAlign = 'left';
     ctx.globalAlpha = 0.2;
@@ -101,21 +107,11 @@ function main() {
     reset();
     updateParticles();
     addParticlesRandomly();
+    if (isInfomationEnabled)
+        showInformations();
     requestAnimationFrame(main);
-}
-
-function mainPlusInfos() {
-    reset();
-    updateParticles();
-    addParticlesRandomly();
-    showParticlesCountOnAllDivisionBlocks();
-    requestAnimationFrame(mainPlusInfos);
 }
 
 ctx.globalCompositeOperation = "lighter";
 
-let url = new URL(window.location.href);
-if (url.searchParams.get("infos") == "true")
-    mainPlusInfos();
-else
-    main();
+main();

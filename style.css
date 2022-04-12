@@ -2,16 +2,17 @@
     --grid-color: #3e3a36;
 }
 
-html, body{
-    text-align: center;
+body{
     font-family: "Inconsolata";
     background-color: #2f2c29;
-    padding: 0;
-    margin: 0;
     overflow: hidden;
 }
 
 #canvas {
+    z-index: -99999;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     /* background-image:
