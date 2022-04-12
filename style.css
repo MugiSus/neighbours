@@ -20,13 +20,13 @@ html, body{
         var(--grid-color),
         var(--grid-color) 1px,
         #0000 1px,
-        #0000 100px
+        #0000 150px
     ),
     repeating-linear-gradient(
         180deg,
         var(--grid-color),
         var(--grid-color) 1px,
         #0000 1px,
-        #0000 100px
+        #0000 150px
     );
 }
