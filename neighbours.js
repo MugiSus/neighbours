@@ -1,9 +1,10 @@
 const url = new URL(window.location.href);
 let areInfomationsEnabled = url.searchParams.get('infos') == 'true';
+let isParticleAdditionEnabled = true;
 
 let particles = [];
 let divisionBlocks = {};
-let neighboursRange = 150; // neibours distance
+let neighboursRange = url.searchParams.get('range') ?? 150;
 let accelerationFactor = -0.2;
 
 let checkcount = 0;
@@ -111,9 +112,8 @@ function showInformations() {
 function main() {
     reset();
     updateParticles();
-    addParticlesRandomly();
-    if (areInfomationsEnabled)
-        showInformations();
+    if (isParticleAdditionEnabled) addParticlesRandomly();
+    if (areInfomationsEnabled) showInformations();
     requestAnimationFrame(main);
 }
 
