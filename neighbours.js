@@ -1,9 +1,11 @@
 const url = new URL(window.location.href);
-let isInfomationEnabled = url.searchParams.get('infos') == 'true';
+let areInfomationsEnabled = url.searchParams.get('infos') == 'true';
 
 let particles = [];
 let divisionBlocks = {};
 let neighboursRange = 150; // neibours distance
+let accelerationFactor = -0.2;
+
 let checkcount = 0;
 
 class Particle {
@@ -45,12 +47,15 @@ class Particle {
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(particle.x, particle.y);
                 ctx.stroke();
-
-                // let direction = Math.atan2(particle.y - this.y, particle.x - this.x);
-                // this.vx += Math.cos(direction) * (distance / neighboursRange) * 0.04;
-                // this.vy += Math.sin(direction) * (distance / neighboursRange) * 0.04;
-                // particle.vx -= Math.cos(direction) * (distance / neighboursRange) * 0.04;
-                // particle.vy -= Math.sin(direction) * (distance / neighboursRange) * 0.04;
+                
+                if (accelerationFactor != 0) {
+                    let direction = Math.atan2(particle.y - this.y, particle.x - this.x);
+                    let strength = Math.max(0.75 - (distance / neighboursRange), 0) * accelerationFactor;
+                    this.vx += Math.cos(direction) * strength;
+                    this.vy += Math.sin(direction) * strength;
+                    particle.vx += Math.cos(direction) * -strength;
+                    particle.vy += Math.sin(direction) * -strength;
+                }
             }
         });
         ctx.globalAlpha = 1;
@@ -107,7 +112,7 @@ function main() {
     reset();
     updateParticles();
     addParticlesRandomly();
-    if (isInfomationEnabled)
+    if (areInfomationsEnabled)
         showInformations();
     requestAnimationFrame(main);
 }
