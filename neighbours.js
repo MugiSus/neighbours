@@ -76,10 +76,21 @@ function addParticlesRandomly() {
     }
 }
 
+function showParticlesCountOnAllDivisionBlocks() {
+    for (let x in divisionBlocks) {
+        for (let y in divisionBlocks[x]) {
+            ctx.fillStyle = '#ffffff11';
+            ctx.font = '30px Inconsolata';
+            ctx.fillText(`${divisionBlocks[x][y].length}`, x * (neigboursDistance + 1) - 30, y * (neigboursDistance + 1) - 15);
+        }
+    }
+}
+
 function main() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     updateParticles();
     addParticlesRandomly();
+    // showParticlesCountOnAllDivisionBlocks();
     requestAnimationFrame(main);
 }
 
