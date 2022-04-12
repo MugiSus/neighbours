@@ -90,7 +90,7 @@ function showParticlesCountOnAllDivisionBlocks() {
     }
     ctx.font = 'italic 100 30px Inconsolata';
     ctx.globalAlpha = 0.2;
-    ctx.fillText("neighbours.js", canvas.width - 20, 35);
+    ctx.fillText("neighbours", canvas.width - 20, 35);
     ctx.font = '100 30px Inconsolata';
     ctx.textAlign = 'left';
     ctx.globalAlpha = 0.2;
