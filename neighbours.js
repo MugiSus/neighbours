@@ -50,7 +50,7 @@ class Particle {
                 
                 if (accelerationFactor != 0) {
                     let direction = Math.atan2(particle.y - this.y, particle.x - this.x);
-                    let strength = Math.max(0.75 - (distance / neighboursRange), 0) * accelerationFactor;
+                    let strength = (0.8 - (distance / neighboursRange)) * accelerationFactor;
                     this.vx += Math.cos(direction) * strength;
                     this.vy += Math.sin(direction) * strength;
                     particle.vx += Math.cos(direction) * -strength;
