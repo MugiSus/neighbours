@@ -15,6 +15,10 @@ class Particle {
         ctx.beginPath();
         ctx.arc(this.x, this.y, 2, 0, 2 * Math.PI);
         ctx.fill();
+        // ctx.globalAlpha = 0.1;
+        // ctx.beginPath();
+        // ctx.arc(this.x, this.y, neigboursDistance / 2, 0, 2 * Math.PI);
+        // ctx.stroke();
     }
 
     update(ctx) {
@@ -23,12 +27,10 @@ class Particle {
         this.draw(ctx);
 
         let [blockX, blockY] = [
-            Math.trunc(this.x / (neigboursDistance * 2)) - (this.x / (neigboursDistance * 2) % 1 < 0.5),
-            Math.trunc(this.y / (neigboursDistance * 2)) - (this.y / (neigboursDistance * 2) % 1 < 0.5)
+            Math.trunc(this.x / neigboursDistance) - (this.x / neigboursDistance % 1 < 0.5),
+            Math.trunc(this.y / neigboursDistance) - (this.y / neigboursDistance % 1 < 0.5)
         ];
         
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 1;
         new Set([
             ...addParticleInDivisionBlock(blockX, blockY, this),
             ...addParticleInDivisionBlock(blockX + 1, blockY, this),
@@ -47,7 +49,7 @@ class Particle {
             }
         });
         ctx.globalAlpha = 1;
-
+        
         return this.x > -neigboursDistance && this.x < canvas.width + neigboursDistance && this.y > -neigboursDistance && this.y < canvas.height + neigboursDistance;
     }
 }
@@ -60,7 +62,9 @@ function addParticleInDivisionBlock(x, y, particle) {
 function updateParticles() {
     checkcount = 0;
     divisionBlocks = {};
+    ctx.lineWidth = 1;
     ctx.fillStyle = '#ffffff88';
+    ctx.strokeStyle = '#ffffff';
     particles = particles.filter(particle => particle.update(ctx));
 }
 
