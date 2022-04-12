@@ -15,17 +15,13 @@ class Particle {
         ctx.beginPath();
         ctx.arc(this.x, this.y, 2, 0, 2 * Math.PI);
         ctx.fill();
-        // ctx.globalAlpha = 0.1;
-        // ctx.beginPath();
-        // ctx.arc(this.x, this.y, neigboursDistance / 2, 0, 2 * Math.PI);
-        // ctx.stroke();
     }
-
+    
     update(ctx) {
         this.x += this.vx;
         this.y += this.vy;
         this.draw(ctx);
-
+        
         let [blockX, blockY] = [
             Math.trunc(this.x / neigboursDistance) - (this.x / neigboursDistance % 1 < 0.5),
             Math.trunc(this.y / neigboursDistance) - (this.y / neigboursDistance % 1 < 0.5)
@@ -59,9 +55,13 @@ function addParticleInDivisionBlock(x, y, particle) {
     return divisionBlocks[x][y];
 }
 
-function updateParticles() {
+function reset() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     checkcount = 0;
     divisionBlocks = {};
+}
+
+function updateParticles() {
     ctx.lineWidth = 1;
     ctx.fillStyle = '#ffffff88';
     ctx.strokeStyle = '#ffffff';
@@ -70,29 +70,51 @@ function updateParticles() {
 
 function addParticlesRandomly() {
     if (Math.random() < 0.2) {
-        let speed = Math.random() * 2 + 0.5;
+        let speed = Math.random() * 1.5 + 0.5;
         let rad = Math.random() * Math.PI * 2;
         particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, speed * Math.cos(rad), speed * Math.sin(rad)));
     }
 }
 
 function showParticlesCountOnAllDivisionBlocks() {
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '300 30px Inconsolata';
     for (let x in divisionBlocks) {
         for (let y in divisionBlocks[x]) {
-            ctx.fillStyle = '#ffffff11';
-            ctx.font = '30px Inconsolata';
-            ctx.fillText(`${divisionBlocks[x][y].length}`, x * (neigboursDistance + 1) - 30, y * (neigboursDistance + 1) - 15);
+            ctx.globalAlpha = divisionBlocks[x][y].length / 20 * 0.1;
+            ctx.fillRect(x * neigboursDistance, y * neigboursDistance, neigboursDistance, neigboursDistance);
+            ctx.globalAlpha = 0.08;
+            ctx.fillText(divisionBlocks[x][y].length, (x * 1 + 1) * neigboursDistance - 15, (y * 1 + 1) * neigboursDistance - 15);
         }
     }
+    ctx.font = 'italic 100 30px Inconsolata';
+    ctx.globalAlpha = 0.2;
+    ctx.fillText("neighbours.js", canvas.width - 20, 35);
+    ctx.font = '100 30px Inconsolata';
+    ctx.textAlign = 'left';
+    ctx.globalAlpha = 0.2;
+    ctx.fillText(`particles: ${particles.length}, checks: ${checkcount}`, 10, canvas.height - 12);
 }
 
 function main() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    reset();
     updateParticles();
     addParticlesRandomly();
-    // showParticlesCountOnAllDivisionBlocks();
     requestAnimationFrame(main);
 }
 
+function mainPlusInfos() {
+    reset();
+    updateParticles();
+    addParticlesRandomly();
+    showParticlesCountOnAllDivisionBlocks();
+    requestAnimationFrame(mainPlusInfos);
+}
+
 ctx.globalCompositeOperation = "lighter";
-main();
+
+if (location.search.includes('infos')) 
+    mainPlusInfos();
+else
+    main();

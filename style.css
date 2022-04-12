@@ -14,7 +14,7 @@ html, body{
 #canvas {
     width: 100vw;
     height: 100vh;
-    background-image:
+    /* background-image:
     repeating-linear-gradient(
         90deg,
         var(--grid-color),
@@ -28,5 +28,5 @@ html, body{
         var(--grid-color) 1px,
         #0000 1px,
         #0000 150px
-    );
+    ); */
 }
