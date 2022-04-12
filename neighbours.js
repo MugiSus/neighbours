@@ -114,7 +114,8 @@ function mainPlusInfos() {
 
 ctx.globalCompositeOperation = "lighter";
 
-if (location.search.includes('infos')) 
+let url = new URL(window.location.href);
+if (url.searchParams.get("infos") == "true")
     mainPlusInfos();
 else
     main();
