@@ -12,19 +12,19 @@
             </summary>
             <div id="simulation-infos">
                 <div class="info-item">
-                    Particles:<span class="simulation-info-value" id="particles">0</span>
+                    <span class="simulation-info-value" id="particles-value">0</span> particles
                 </div>
                 <div class="info-item">
-                    Neighbour tested:<span class="simulation-info-value" id="neighbour-tested">0</span>
+                    <span class="simulation-info-value" id="neighbour-tested-value">0</span> neighbours tested
                 </div>
-                <!-- <div class="info-item">
+                <div class="info-item action" id="neighbours-range-container">
+                    <div class="range-bar"></div>
+                    <span class="simulation-info-value" id="neighbours-range-value">150</span> Neighbours range
+                </div>
+                <div class="info-item action" id="show-division-infos-container">
                     <input type="checkbox" id="show-division-infos-checkbox" style="display: none;">
-                    <label for="show-division-infos-checkbox" id="show-division-infos-label">division infos</label>
+                    <div id="show-division-infos-text">Show division infos</label>
                 </div>
-                <div class="info-item">
-                    <input type="number" id="neighbours-range-number" min="40" max="400" value="150" style="display: none;">
-                    <label for="neighbours-range-number" id="neighbours-range-label">Neighbours Range:<span class="simulation-info-value" id="neighbour-tested">0</span></label>
-                </div> -->
             </div>
         </details>
         <script src="canvas.js"></script>

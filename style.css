@@ -58,12 +58,18 @@ body{
 }
 
 #simulation-infos {
-    line-height: 2rem;
     display: block;
     margin-top: 0.3rem;
 }
 
+.info-item > * {
+    pointer-events: none;
+}
+
 .info-item {
+    position: relative;
+    background-color: #c2b9b011;
+    margin: 0.5rem 0.25rem;
     display: flex;
     align-items: center;
 }
@@ -73,22 +79,21 @@ body{
     background-color: #c2b9b0;
     margin-right: 0.5rem;
     width: 3px;
-    height: 1.5rem;
+    height: 2rem;
 }
 
 .simulation-info-value {
     font-size: 1.2rem;
-    margin-left: 0.4rem;
+    padding-right: 0.4rem;
 }
 
-#simulation-infos label {
+#simulation-infos .action {
     cursor: pointer;
 }
 
-#show-division-infos-checkbox + #show-division-infos-label::before {
-    content: "Show ";
-}
-
-#show-division-infos-checkbox:checked + #show-division-infos-label::before {
-    content: "Hide ";
+.range-bar {
+    position: absolute;
+    background-color: #c2b9b038;
+    height: 100%;
+    width: 30%;
 }

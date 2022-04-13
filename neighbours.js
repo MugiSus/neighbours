@@ -1,5 +1,5 @@
 const url = new URL(window.location.href);
-let areInfomationsEnabled = url.searchParams.get('infos') == 'true';
+let areInfomationsEnabled = false;
 let isParticleAdditionEnabled = true;
 
 let particles = [];
