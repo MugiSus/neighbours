@@ -1,6 +1,5 @@
 const url = new URL(window.location.href);
 let areInfomationsEnabled = false;
-let isParticleAdditionEnabled = true;
 
 let particles = [];
 let divisionBlocks = {};
@@ -8,6 +7,7 @@ let neighboursRange = url.searchParams.get('range') * 1 || 150;
 let equilibriumDistance = 0.8;
 let repulsionFactor = 0.2;
 let attractionFactor = 0.2;
+let particlesPerFrame = 0.25
 
 let neighbourTestCount = 0;
 
@@ -89,7 +89,7 @@ function updateParticles() {
 }
 
 function addParticlesRandomly() {
-    if (Math.random() < 0.25) {
+    if (Math.random() < particlesPerFrame) {
         let speed = Math.random() * 1.5 + 0.5;
         let rad = Math.random() * Math.PI * 2;
         particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, speed * Math.cos(rad), speed * Math.sin(rad)));
@@ -114,7 +114,7 @@ function main() {
     reset();
     
     updateParticles();
-    if (isParticleAdditionEnabled) addParticlesRandomly();
+    addParticlesRandomly();
     if (areInfomationsEnabled) showDivisionInformations();
 
     updateSimulationInfos(); // user-input.js

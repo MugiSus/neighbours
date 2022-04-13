@@ -64,7 +64,7 @@ body{
 
 #simulation-infos-opener-checkbox:checked ~ #simulation-infos {
     transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-    height: 22.5rem;
+    height: 25rem;
 }
 
 .info-item > * {

@@ -10,7 +10,6 @@
             container.getElementsByClassName("slider-value")[0].textContent = container.dataset.value;
             container.getElementsByClassName("slider-bar")[0].style.width = `${(container.dataset.value - container.dataset.min) / (container.dataset.max - container.dataset.min) * 100}%`;
             
-            console.log(container.id);
             switch (container.id) {
                 case "neighbours-range-slider-container":
                     neighboursRange = value;
@@ -23,6 +22,9 @@
                     break;
                 case "equilibrium-distance-slider-container":
                     equilibriumDistance = value;
+                    break;
+                case "particles-per-frame-slider-container":
+                    particlesPerFrame = value;
                     break;
             }
         }
@@ -42,9 +44,8 @@ let timeStamps = new Array(10);
 function getFPS() {
     let now = performance.now();
     timeStamps.push(now);
-    if (timeStamps.length >= 10) {
+    if (timeStamps.length >= 10)
         return 10000 / (now - timeStamps.shift());
-    }
     return 0;
 }
 
