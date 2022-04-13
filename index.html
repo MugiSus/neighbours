@@ -6,7 +6,29 @@
     </head>
     <body>
         <canvas id="canvas"></canvas>
+        <details id="simulation-infos-container" open>
+            <summary>
+                simulation infos
+            </summary>
+            <div id="simulation-infos">
+                <div class="info-item">
+                    Particles:<span class="simulation-info-value" id="particles">0</span>
+                </div>
+                <div class="info-item">
+                    Neighbour tested:<span class="simulation-info-value" id="neighbour-tested">0</span>
+                </div>
+                <!-- <div class="info-item">
+                    <input type="checkbox" id="show-division-infos-checkbox" style="display: none;">
+                    <label for="show-division-infos-checkbox" id="show-division-infos-label">division infos</label>
+                </div>
+                <div class="info-item">
+                    <input type="number" id="neighbours-range-number" min="40" max="400" value="150" style="display: none;">
+                    <label for="neighbours-range-number" id="neighbours-range-label">Neighbours Range:<span class="simulation-info-value" id="neighbour-tested">0</span></label>
+                </div> -->
+            </div>
+        </details>
         <script src="canvas.js"></script>
+        <script src="user-input.js"></script>
         <script src="neighbours.js"></script>
     </body>
 </html>

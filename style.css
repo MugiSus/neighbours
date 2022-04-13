@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;400&family=Inter:wght@100;300&display=swap');
 
 :root {
     --grid-color: #3e3a36;
@@ -8,6 +8,7 @@ body{
     font-family: "Inconsolata";
     background-color: #2f2c29;
     overflow: hidden;
+    user-select: none;
 }
 
 #canvas {
@@ -32,4 +33,62 @@ body{
         #0000 1px,
         #0000 150px
     ); */
+}
+
+#simulation-infos-container {
+    width: 20rem;
+    color: #c2b9b0;
+}
+
+#simulation-infos-container > summary, .info-item {
+    opacity: 0.6;
+}
+
+#simulation-infos-container > summary:hover, .info-item:hover {
+    opacity: 1;
+}
+
+#simulation-infos-container > summary:active, .info-item:active {
+    opacity: 0.8;
+}
+
+#simulation-infos-container > summary {
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+#simulation-infos {
+    line-height: 2rem;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+}
+
+.info-item::before {
+    content: "";
+    background-color: #c2b9b0;
+    margin-right: 0.5rem;
+    width: 3px;
+    height: 1.5rem;
+}
+
+.simulation-info-value {
+    font-size: 1.2rem;
+    margin-left: 0.4rem;
+}
+
+#simulation-infos label {
+    cursor: pointer;
+}
+
+#show-division-infos-checkbox + #show-division-infos-label::before {
+    content: "Show ";
+}
+
+#show-division-infos-checkbox:checked + #show-division-infos-label::before {
+    content: "Hide ";
 }

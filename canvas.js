@@ -9,15 +9,15 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 // const eventsQueue = [];
-// const addQueueEvent = (event) => {
+// const pushEventsQueue = (event) => {
 //     // event.preventDefault();
 //     eventsQueue.push(event)
 // };
-// document.addEventListener('keydown', addQueueEvent);
-// document.addEventListener('keyup', addQueueEvent);
-// document.addEventListener('mousedown', addQueueEvent);
-// document.addEventListener('mouseup', addQueueEvent);
-// document.addEventListener('mousemove', addQueueEvent);
-// document.addEventListener('wheel', addQueueEvent);
+// document.addEventListener('keydown', pushEventsQueue);
+// document.addEventListener('keyup', pushEventsQueue);
+// document.addEventListener('mousedown', pushEventsQueue);
+// document.addEventListener('mouseup', pushEventsQueue);
+// document.addEventListener('mousemove', pushEventsQueue);
+// document.addEventListener('wheel', pushEventsQueue);
 
 window.oncontextmenu = () => false;

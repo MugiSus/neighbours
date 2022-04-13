@@ -4,10 +4,12 @@ let isParticleAdditionEnabled = true;
 
 let particles = [];
 let divisionBlocks = {};
-let neighboursRange = url.searchParams.get('range') ?? 150;
-let accelerationFactor = -0.2;
+let neighboursRange = url.searchParams.get('range') * 1 || 150;
+let equilibrium = 0.8;
+let repulsionFactor = 0.2;
+let attractionFactor = 0.2;
 
-let checkcount = 0;
+let neighbourTestCount = 0;
 
 class Particle {
     constructor(x, y, vx, vy) {
@@ -40,26 +42,28 @@ class Particle {
             ...addParticleInDivisionBlock(blockX + 1, blockY + 1, this)
         ]).forEach(particle => {
             if (particle == this) return;
-            checkcount++;
-            let distance = ((this.x - particle.x) ** 2 + (this.y - particle.y) ** 2) ** 0.5;
-            if (distance < neighboursRange) {
-                ctx.globalAlpha = 1 - (distance / neighboursRange);
+            neighbourTestCount++;
+            let distance = ((this.x - particle.x) ** 2 + (this.y - particle.y) ** 2) ** 0.5 / neighboursRange;
+            if (distance < 1) {
+                ctx.globalAlpha = 1 - distance;
+                ctx.lineWidth = distance ** 2 + 1;
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(particle.x, particle.y);
                 ctx.stroke();
                 
-                if (accelerationFactor != 0) {
+                if (attractionFactor != 0 || repulsionFactor != 0) {
                     let direction = Math.atan2(particle.y - this.y, particle.x - this.x);
-                    let strength = (0.8 - (distance / neighboursRange)) * accelerationFactor;
+                    let strength = equilibrium > distance ? (equilibrium - distance) * -repulsionFactor : (distance - equilibrium) * attractionFactor;
                     this.vx += Math.cos(direction) * strength;
                     this.vy += Math.sin(direction) * strength;
                     particle.vx += Math.cos(direction) * -strength;
                     particle.vy += Math.sin(direction) * -strength;
                 }
+
+                ctx.globalAlpha = 1;
             }
         });
-        ctx.globalAlpha = 1;
         
         return this.x > -neighboursRange && this.x < canvas.width + neighboursRange && this.y > -neighboursRange && this.y < canvas.height + neighboursRange;
     }
@@ -72,14 +76,15 @@ function addParticleInDivisionBlock(x, y, particle) {
 
 function reset() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    checkcount = 0;
+    neighbourTestCount = 0;
     divisionBlocks = {};
 }
 
 function updateParticles() {
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#ffffff88';
+    ctx.fillStyle = '#ffffff66';
     ctx.strokeStyle = '#ffffff';
+    ctx.globalAlpha = 1;
     particles = particles.filter(particle => particle.update(ctx));
 }
 
@@ -91,10 +96,10 @@ function addParticlesRandomly() {
     }
 }
 
-function showInformations() {
+function showDivisionInformations() {
     ctx.textAlign = 'center';
     ctx.fillStyle = '#ffffff';
-    ctx.font = '300 30px Inconsolata';
+    ctx.font = '400 30px Inconsolata';
     for (let x in divisionBlocks) {
         for (let y in divisionBlocks[x]) {
             ctx.globalAlpha = divisionBlocks[x][y].length / 20 * 0.1;
@@ -103,17 +108,17 @@ function showInformations() {
             ctx.fillText(divisionBlocks[x][y].length, (x * 1 + 0.5) * neighboursRange, (y * 1 + 0.5) * neighboursRange + 10);
         }
     }
-    ctx.font = '100 30px Inconsolata';
-    ctx.textAlign = 'left';
-    ctx.globalAlpha = 0.2;
-    ctx.fillText(`particles: ${particles.length}, checks: ${checkcount}`, 10, canvas.height - 12);
 }
 
 function main() {
     reset();
+    
     updateParticles();
     if (isParticleAdditionEnabled) addParticlesRandomly();
-    if (areInfomationsEnabled) showInformations();
+    if (areInfomationsEnabled) showDivisionInformations();
+
+    updateSimulationInfos(); // user-input.js
+
     requestAnimationFrame(main);
 }
 
