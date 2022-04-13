@@ -7,7 +7,7 @@ let neighboursRange = url.searchParams.get('range') * 1 || 150;
 let equilibriumDistance = 0.8;
 let repulsionFactor = 0.2;
 let attractionFactor = 0.2;
-let particlesPerFrame = 0.25
+let particlesPerFrame = 0.25;
 
 let neighbourTestCount = 0;
 
