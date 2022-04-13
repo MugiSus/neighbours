@@ -37,7 +37,19 @@ document.getElementById('show-division-infos-container').addEventListener("mouse
     document.getElementById('show-division-infos-text').textContent = areInfomationsEnabled ? 'Hide division infos' : 'Show division infos';
 });
 
+let timeStamps = new Array(10);
+
+function getFPS() {
+    let now = performance.now();
+    timeStamps.push(now);
+    if (timeStamps.length >= 10) {
+        return 1000 / ((now - timeStamps.shift()) / 10);
+    }
+    return 0;
+}
+
 function updateSimulationInfos() {
+    document.getElementById('fps-value').textContent = getFPS().toFixed(3);
     document.getElementById('particles-value').textContent = particles.length;
     document.getElementById('neighbour-tested-value').textContent = neighbourTestCount;
 }
