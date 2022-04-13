@@ -43,7 +43,7 @@ function getFPS() {
     let now = performance.now();
     timeStamps.push(now);
     if (timeStamps.length >= 10) {
-        return 100 / (now - timeStamps.shift());
+        return 10000 / (now - timeStamps.shift());
     }
     return 0;
 }
