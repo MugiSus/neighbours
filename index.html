@@ -10,27 +10,20 @@
         <div id="simulation-infos-container">
             <input type="checkbox" id="simulation-infos-opener-checkbox" style="display: none;">
             <div id="simulation-infos">
-                <label for="simulation-infos-opener-checkbox">
-                    <div class="info-item item-action" id="simulation-infos-opener">
-                        <span class="material-icons-outlined icon-small simulation-infos-opener-icon simulation-infos-opener-icon-open">expand_more</span>
-                        <span class="material-icons-outlined icon-small simulation-infos-opener-icon simulation-infos-opener-icon-close">expand_less</span>
-                        Simulation Infos & Params
-                    </div>
-                </label>
                 <div class="info-item">
                     <span class="material-icons-outlined icon-small">60fps_select</span>
                     <span class="simulation-info-value" id="fps-value">60</span>
-                    frames per second
+                    Frames per second
                 </div>
                 <div class="info-item">
                     <span class="material-icons-outlined icon-small">person</span>
                     <span class="simulation-info-value" id="particles-value">0</span>
-                    particles simulated
+                    Particles simulated
                 </div>
                 <div class="info-item">
                     <span class="material-icons-outlined icon-small">group</span>
                     <span class="simulation-info-value" id="neighbour-tested-value">0</span>
-                    neighbours tested
+                    Neighbours tested
                 </div>
                 <div class="info-item item-action" id="show-division-infos-container">
                     <span class="material-icons-outlined icon-small">grid_4x4</span>
@@ -66,7 +59,18 @@
                     <span class="simulation-info-value slider-value" id="particles-per-frame-value"></span>
                     New particles per frame
                 </div>
+                <div class="info-item">
+                    <span class="material-icons-outlined icon-small">code</span>
+                    MugiSus / neighbours.js
+                </div>
             </div>
+            <label for="simulation-infos-opener-checkbox" id="simulation-infos-opener-label">
+                <div class="info-item item-action" id="simulation-infos-opener">
+                    <span class="material-icons-outlined icon-small simulation-infos-opener-icon simulation-infos-opener-icon-open">expand_more</span>
+                    <span class="material-icons-outlined icon-small simulation-infos-opener-icon simulation-infos-opener-icon-close">expand_less</span>
+                    Simulation Infos & Params
+                </div>
+            </label>
         </div>
         <script src="canvas.js"></script>
         <script src="user-input.js"></script>
