@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;400&family=Inter:wght@100;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;400&family=Inter:wght@100;300;600&display=swap');
 
 :root {
     --grid-color: #3e3a36;
@@ -6,6 +6,7 @@
 
 body{
     font-family: "Inconsolata";
+    font-weight: 600;
     background-color: #2f2c29;
     overflow: hidden;
     user-select: none;
@@ -36,7 +37,7 @@ body{
 }
 
 #simulation-infos-container {
-    width: 20rem;
+    width: 25rem;
     color: #c2b9b0;
 }
 
@@ -84,16 +85,16 @@ body{
 
 .simulation-info-value {
     font-size: 1.2rem;
-    padding-right: 0.4rem;
+    padding-right: 0.5rem;
 }
 
 #simulation-infos .action {
     cursor: pointer;
 }
 
-.range-bar {
+.slider-bar {
     position: absolute;
     background-color: #c2b9b038;
     height: 100%;
-    width: 30%;
+    width: 20%;
 }

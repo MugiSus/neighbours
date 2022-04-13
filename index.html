@@ -11,21 +11,32 @@
                 simulation infos
             </summary>
             <div id="simulation-infos">
+                <div class="info-item action" id="show-division-infos-container">
+                    <input type="checkbox" id="show-division-infos-checkbox" style="display: none;">
+                    <div id="show-division-infos-text">Show division infos</div>
+                </div>
                 <div class="info-item">
-                    <span class="simulation-info-value" id="particles-value">0</span> particles
+                    <span class="simulation-info-value" id="particles-value">0</span> particles simulated
                 </div>
                 <div class="info-item">
                     <span class="simulation-info-value" id="neighbour-tested-value">0</span> neighbours tested
                 </div>
-                <div class="info-item action" id="neighbours-range-container">
-                    <div class="range-bar"></div>
-                    <span class="simulation-info-value" id="neighbours-range-value">150</span> Neighbours range
+                <div class="info-item action slider-container" id="neighbours-range-slider-container" data-min="40" data-max="400" data-value="150" data-step="1">
+                    <div class="slider-bar"></div>
+                    <span class="simulation-info-value slider-value" id="neighbours-slider-value"></span> Neighbours range
                 </div>
-                <div class="info-item action" id="show-division-infos-container">
-                    <input type="checkbox" id="show-division-infos-checkbox" style="display: none;">
-                    <div id="show-division-infos-text">Show division infos</label>
+                <div class="info-item action slider-container" id="equilibrium-distance-slider-container" data-min="0" data-max="1" data-value="0.75" data-step="0.01" data-to-fixed="2">
+                    <div class="slider-bar"></div>
+                    <span class="simulation-info-value slider-value" id="equilibrium-distance-value"></span> Equilibrium distance
                 </div>
-            </div>
+                <div class="info-item action slider-container" id="attraction-factor-slider-container" data-min="0" data-max="3" data-value="0.2" data-step="0.05" data-to-fixed="2">
+                    <div class="slider-bar"></div>
+                    <span class="simulation-info-value slider-value" id="attraction-factor-value"></span> Attraction factor
+                </div>
+                <div class="info-item action slider-container" id="repulsion-factor-slider-container" data-min="0" data-max="3" data-value="0.2" data-step="0.05" data-to-fixed="2">
+                    <div class="slider-bar"></div>
+                    <span class="simulation-info-value slider-value" id="repulsion-factor-value"></span> Repulsion factor
+                </div>
         </details>
         <script src="canvas.js"></script>
         <script src="user-input.js"></script>

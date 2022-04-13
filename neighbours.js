@@ -5,7 +5,7 @@ let isParticleAdditionEnabled = true;
 let particles = [];
 let divisionBlocks = {};
 let neighboursRange = url.searchParams.get('range') * 1 || 150;
-let equilibrium = 0.8;
+let equilibriumDistance = 0.8;
 let repulsionFactor = 0.2;
 let attractionFactor = 0.2;
 
@@ -54,7 +54,7 @@ class Particle {
                 
                 if (attractionFactor != 0 || repulsionFactor != 0) {
                     let direction = Math.atan2(particle.y - this.y, particle.x - this.x);
-                    let strength = equilibrium > distance ? (equilibrium - distance) * -repulsionFactor : (distance - equilibrium) * attractionFactor;
+                    let strength = equilibriumDistance > distance ? (equilibriumDistance - distance) * -repulsionFactor : (distance - equilibriumDistance) * attractionFactor;
                     this.vx += Math.cos(direction) * strength;
                     this.vy += Math.sin(direction) * strength;
                     particle.vx += Math.cos(direction) * -strength;
