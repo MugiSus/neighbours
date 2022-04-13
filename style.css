@@ -58,7 +58,6 @@ body{
     transition-duration: 0.4s;
     transition-timing-function: cubic-bezier(0.4, 0.0, 0.0, 1);
     display: block;
-    margin-top: 0.3rem;
     height: 2.5rem;
     overflow: hidden;
 }
@@ -73,6 +72,7 @@ body{
 }
 
 .info-item {
+    border-radius: 2px;
     position: relative;
     background-color: #c2b9b011;
     height: 2rem;
@@ -81,7 +81,7 @@ body{
     align-items: center;
 }
 
-.info-item:not(#simulation-infos-opener)::before {
+.info-item::before {
     content: "";
     background-color: #c2b9b0;
     margin-right: 0.5rem;
@@ -105,14 +105,17 @@ body{
     width: 20%;
 }
 
-.material-icons-outlined.simulation-infos-opener-icon {
-    display: none;
-    font-size: 1.4rem;
-    margin-left: 0.5rem;
-    margin-right: 0.4rem;
+.material-icons-outlined.icon-small {
+    font-size: 1.35rem;
+    margin-left: 0.2rem;
+    margin-right: 0.6rem;
 }
 
-#simulation-infos-opener-checkbox:not(:checked) ~ #simulation-infos #simulation-infos-opener-icon-info,
-#simulation-infos-opener-checkbox:checked ~ #simulation-infos #simulation-infos-opener-icon-cancel {
+.material-icons-outlined.simulation-infos-opener-icon {
+    display: none;
+}
+
+#simulation-infos-opener-checkbox:not(:checked) ~ #simulation-infos .simulation-infos-opener-icon-open,
+#simulation-infos-opener-checkbox:checked ~ #simulation-infos .simulation-infos-opener-icon-close {
     display: block;
 }

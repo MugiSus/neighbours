@@ -37,10 +37,6 @@ document.getElementById('show-division-infos-container').addEventListener("mouse
     document.getElementById('show-division-infos-text').textContent = areInfomationsEnabled ? 'Hide division infos' : 'Show division infos';
 });
 
-document.getElementById('infos-close-container').addEventListener("mouseup", (event) => {
-    document.getElementById('simulation-infos-container').removeAttribute("open");
-});
-
 function updateSimulationInfos() {
     document.getElementById('particles-value').textContent = particles.length;
     document.getElementById('neighbour-tested-value').textContent = neighbourTestCount;
