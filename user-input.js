@@ -11,7 +11,7 @@
             container.getElementsByClassName("slider-bar")[0].style.width = `${(container.dataset.value - container.dataset.min) / (container.dataset.max - container.dataset.min) * 100}%`;
             
             switch (container.id) {
-                case "neighbours-range-slider-container":
+                case "neighbours-range-slider-container": 
                     neighboursRange = value;
                     break;
                 case "attraction-factor-slider-container":

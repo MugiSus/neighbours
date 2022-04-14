@@ -116,7 +116,6 @@ function main() {
     updateParticles();
     addParticlesRandomly();
     if (areInfomationsEnabled) showDivisionInformations();
-
     updateSimulationInfos(); // user-input.js
 
     requestAnimationFrame(main);

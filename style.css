@@ -42,7 +42,7 @@ body{
 }
 
 .info-item {
-    opacity: 0.6;
+    opacity: 0.75;
 }
 
 .info-item:hover {
@@ -50,7 +50,7 @@ body{
 }
 
 .info-item.item-action:active {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 #simulation-infos {
