@@ -67,7 +67,7 @@ body{
     height: 25rem;
 }
 
-.info-item > * {
+.info-item * {
     pointer-events: none;
 }
 
