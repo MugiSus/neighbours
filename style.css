@@ -1,25 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;400&family=Inter:wght@100;300;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;400&family=Inter:wght@100;300;600&display=swap");
 
 :root {
-    --grid-color: #3e3a36;
+  --grid-color: #3e3a36;
 }
 
-body{
-    font-family: "Inconsolata";
-    font-weight: 600;
-    background-color: #2f2c29;
-    overflow: hidden;
-    user-select: none;
+body {
+  font-family: "Inconsolata";
+  font-weight: 600;
+  background-color: #2f2c29;
+  overflow: hidden;
+  user-select: none;
 }
 
 #canvas {
-    z-index: -99999;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    /* background-image:
+  z-index: -99999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* background-image:
     repeating-linear-gradient(
         90deg,
         var(--grid-color),
@@ -37,85 +37,89 @@ body{
 }
 
 #simulation-infos-container {
-    width: 25rem;
-    color: #c2b9b0;
+  width: 25rem;
+  color: #c2b9b0;
 }
 
 .info-item {
-    opacity: 0.75;
+  opacity: 0.75;
 }
 
 .info-item:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .info-item.item-action:active {
-    opacity: 0.85;
+  opacity: 0.85;
 }
 
 #simulation-infos {
-    transition-property: height;
-    transition-duration: 0.4s;
-    transition-timing-function: cubic-bezier(0.4, 0.0, 0.0, 1);
-    display: block;
-    height: 0rem;
-    overflow: hidden;
+  transition-property: height;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0, 1);
+  display: block;
+  height: 0rem;
+  overflow: hidden;
 }
 
 #simulation-infos-opener-checkbox:checked ~ #simulation-infos {
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-    height: 25rem;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  height: 25rem;
 }
 
 .info-item * {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 .info-item {
-    border-radius: 2px;
-    position: relative;
-    background-color: #c2b9b011;
-    height: 2rem;
-    margin: 0.5rem 0.25rem;
-    display: flex;
-    align-items: center;
+  border-radius: 2px;
+  position: relative;
+  background-color: #c2b9b011;
+  height: 2rem;
+  margin: 0.5rem 0.25rem;
+  display: flex;
+  align-items: center;
 }
 
 .info-item::before {
-    content: "";
-    background-color: #c2b9b0;
-    margin-right: 0.5rem;
-    width: 3px;
-    height: 100%;
+  content: "";
+  background-color: #c2b9b0;
+  margin-right: 0.5rem;
+  width: 3px;
+  height: 100%;
 }
 
 .simulation-info-value {
-    font-size: 1.2rem;
-    padding-right: 0.5rem;
+  font-size: 1.2rem;
+  padding-right: 0.5rem;
 }
 
 .info-item.item-action {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .slider-bar {
-    position: absolute;
-    background-color: #c2b9b038;
-    height: 100%;
-    width: 20%;
+  position: absolute;
+  background-color: #c2b9b038;
+  height: 100%;
+  width: 20%;
 }
 
 .material-icons-outlined.icon-small {
-    font-size: 1.35rem;
-    margin-left: 0.2rem;
-    margin-right: 0.6rem;
+  font-size: 1.35rem;
+  margin-left: 0.2rem;
+  margin-right: 0.6rem;
 }
 
 .material-icons-outlined.simulation-infos-opener-icon {
-    display: none;
+  display: none;
 }
 
-#simulation-infos-opener-checkbox:not(:checked) ~ #simulation-infos-opener-label .simulation-infos-opener-icon-open,
-#simulation-infos-opener-checkbox:checked ~ #simulation-infos-opener-label .simulation-infos-opener-icon-close {
-    display: block;
+#simulation-infos-opener-checkbox:not(:checked)
+  ~ #simulation-infos-opener-label
+  .simulation-infos-opener-icon-open,
+#simulation-infos-opener-checkbox:checked
+  ~ #simulation-infos-opener-label
+  .simulation-infos-opener-icon-close {
+  display: block;
 }
